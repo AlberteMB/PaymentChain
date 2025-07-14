@@ -54,8 +54,8 @@
         <spring-boot.version>3.5.0</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
         <postgres.version>42.7.2</postgres.version>    
-        <java-validation.version>2.0.1.Final</java-validation.version> 
-        <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
+        <java-validation.version>3.0.2</java-validation.version>
+        <dockerfile-maven-version>1.4.17</dockerfile-maven-version>
     </properties>
     
     <dependencyManagement>

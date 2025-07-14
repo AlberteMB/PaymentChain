@@ -37,6 +37,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    
            
     <dependencies>       
                 
@@ -44,7 +45,8 @@
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>          
+            <artifactId>spring-boot-starter-webflux</artifactId>               
+            
         </dependency>
         
         <!--
@@ -75,9 +77,9 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${org.springdoc.version}</version>
-        </dependency>
-        
-       
+        </dependency>            
+            
+      
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
