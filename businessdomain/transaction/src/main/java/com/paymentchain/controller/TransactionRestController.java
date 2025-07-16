@@ -48,8 +48,8 @@ public class TransactionRestController {
                     existingTransaction.setAmount(transactionDetails.getAmount());
                     existingTransaction.setFee(transactionDetails.getFee());
                     existingTransaction.setDescription(transactionDetails.getDescription());
-                    existingTransaction.setStatus(transactionDetails.getStatus());
-                    existingTransaction.setChannel(transactionDetails.getChannel());
+                    //existingTransaction.setStatus(transactionDetails.getStatus());
+                    //existingTransaction.setChannel(transactionDetails.getChannel());
                     Transaction updatedTransaction = transactionRepository.save(existingTransaction);
                     return ResponseEntity.ok(updatedTransaction);
                 })

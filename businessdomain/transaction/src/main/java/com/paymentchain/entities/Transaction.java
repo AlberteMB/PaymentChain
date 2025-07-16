@@ -21,7 +21,7 @@ public class Transaction {
     private double amount;
     private double fee;
     private String description;
-    private Status status;
-    private Channel channel;
+    //private Status status;
+    //private Channel channel;
                
 }

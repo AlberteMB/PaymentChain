@@ -8,6 +8,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
+import jakarta.validation.constraints.NotBlank;
 import java.time.Duration;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class CustomerRestController {
                     existingCustomer.setPhone(customerDetails.getPhone());
                     existingCustomer.setAddress(customerDetails.getAddress());
                     existingCustomer.setProducts(customerDetails.getProducts());
-                    existingCustomer.setTransations(customerDetails.getTransations());
+                    existingCustomer.setTransactions(customerDetails.getTransactions());
                     Customer updatedCustomer = customerRepository.save(existingCustomer);
                     return ResponseEntity.ok(updatedCustomer);
                 })
@@ -115,7 +116,7 @@ public class CustomerRestController {
     }
     
     @GetMapping("/full")
-    public Customer getByCode (@RequestParam String code) {
+    public Customer getByCode(@RequestParam("code") String code) {
         Customer customer = customerRepository.findByCode(code);
         List<CustomerProduct> products = customer.getProducts();
         products.forEach(x -> {
@@ -128,9 +129,9 @@ public class CustomerRestController {
     
     private String getProductName (long id){
         WebClient build =webClientBuilder.clientConnector(new ReactorClientHttpConnector(client))
-                .baseUrl("http://localhost:8082/product")
+                .baseUrl("http://localhost:8082/api/v1/products")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8082/product"))
+                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8082/api/v1/products"))
                 .build();
         
         JsonNode block = build.method(HttpMethod.GET).uri("/" + id)
