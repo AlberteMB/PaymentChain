@@ -117,15 +117,22 @@ public class CustomerRestController {
     }
     
     @GetMapping("/full")
-    public Customer getByCode(@RequestParam("code") String code) {
+    public Customer getByCode(@RequestParam(name = "code") String code) {
         Customer customer = customerRepository.findByCode(code);
-        List<CustomerProduct> products = customer.getProducts();
-        products.forEach(x -> {
-            String productName = getProductName(x.getId());
-            x.setProductName(productName);
-        });
+        if (customer != null) {
+            List<CustomerProduct> products = customer.getProducts();
+
+            //for each product find it name
+            products.forEach(x -> {
+                String productName = getProductName(x.getProductId());
+                x.setProductName(productName);
+            });
+            //find all transactions that belong this account number
+            List<?> transactions = getTransactions(customer.getIban());
+            customer.setTransactions(transactions);
+  
+        }
         return customer;
-                
     }
     
     private String getProductName (long id){
