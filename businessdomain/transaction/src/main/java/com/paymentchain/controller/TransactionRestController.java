@@ -43,7 +43,7 @@ public class TransactionRestController {
         return transactionRepository.findById(id)
                 .map(existingTransaction -> {
                     existingTransaction.setReference(transactionDetails.getReference());
-                    existingTransaction.setAccountIban(transactionDetails.getAccountIban());
+                    existingTransaction.setIbanAccount(transactionDetails.getIbanAccount());
                     existingTransaction.setDate(transactionDetails.getDate());
                     existingTransaction.setAmount(transactionDetails.getAmount());
                     existingTransaction.setFee(transactionDetails.getFee());

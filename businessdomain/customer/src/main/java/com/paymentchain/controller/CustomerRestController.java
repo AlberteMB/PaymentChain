@@ -37,6 +37,7 @@ public class CustomerRestController {
         this.webClientBuilder = webClientBuilder;
     }
     
+    // WebClient requires HttpClient library to work propertly 
     HttpClient client = HttpClient.create()
             // Connection Timeout: is a period within which a connection between a client and a server must be stablished
             .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
@@ -139,5 +140,31 @@ public class CustomerRestController {
         
         String name = block.get("name").asText();
         return name;
+    }
+    
+    
+//     * Call Transaction Microservice and Find all transaction that belong to the
+//     * account give
+//     *
+//     * @param iban account number of the customer
+//     * @return All transaction that belong this account
+     
+    private List<?> getTransactions(String iban) {
+        WebClient build = webClientBuilder.clientConnector(new ReactorClientHttpConnector(client))
+                .baseUrl("http://localhost:8083/api/v1/transactions")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();       
+        
+        Optional<List<?>> transactionsOptional = Optional.ofNullable(build.method(HttpMethod.GET)
+        .uri(uriBuilder -> uriBuilder
+                .path("/customer/transactions")
+                .queryParam("ibanAccount", iban)
+                .build())
+        .retrieve()
+        .bodyToFlux(Object.class)
+        .collectList()
+        .block());       
+
+        return transactionsOptional.orElse(Collections.emptyList());
     }
 }

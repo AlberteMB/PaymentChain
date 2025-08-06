@@ -12,16 +12,18 @@ import lombok.Data;
 @Entity
 @Data
 public class Transaction {
+    
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
+    
     private String reference;
-    private String accountIban;
+    private String ibanAccount;
     private Date date;
     private double amount;
     private double fee;
     private String description;
-    //private Status status;
-    //private Channel channel;
+    private String status;
+    private String channel; 
                
 }
